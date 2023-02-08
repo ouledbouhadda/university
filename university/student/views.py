@@ -6,3 +6,5 @@ def index(request):
     return HttpResponse("Hello")
 
 # Create your views here.
+def emploi(request):
+    return HttpResponse('emploi')
