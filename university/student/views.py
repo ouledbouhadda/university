@@ -1,11 +1,29 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render,redirect
+from django.contrib.auth.decorators import login_required , user_passes_test
+from student.models import Student_Subject,Student
 
 
-def index(request):
+def home(request):
+     if request.user.is_authenticated:
+          print(request.user)
+          if request.user.is_student:
+               return redirect('student_home')
+          elif request.user.is_teacher:
+               return redirect('teacher_home')
+     return render(request,'home.html')
 
-    return HttpResponse("Hello Nour")
+@login_required
+@user_passes_test(lambda u: u.is_student)
+def student_home(request):
+     query_set1 = Student.objects.filter(student_profile=request.user).first()
+     query_set2 = Student_Subject.objects.filter(student=query_set1)
+     print(query_set2)
+     return render(request,'student_homepage.html',{'subs' : query_set2})
 
-# Create your views here.
-def emploi(request):
-    return HttpResponse('emploi')
+
+
+@login_required
+@user_passes_test(lambda u: u.is_teacher )
+def teacher_home(request):
+    return render(request,'teacher_homepage.html')
+
