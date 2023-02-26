@@ -5,7 +5,6 @@ from student.models import Student_Subject,Student
 
 def home(request):
      if request.user.is_authenticated:
-          print(request.user)
           if request.user.is_student:
                return redirect('student_home')
           elif request.user.is_teacher:
