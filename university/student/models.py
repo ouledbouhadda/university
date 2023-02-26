@@ -35,10 +35,12 @@ class Student_Subject (models.Model):
     def __str__(self):
         return f'{self.student} -> {self.subject}'
     
+
 class Teacher(models.Model):
     profile = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete= models.CASCADE,related_name='+')
     teacher_subject=models.ManyToManyField(Subject)
 
     def __str__(self):
         return self.profile.username
+
 
