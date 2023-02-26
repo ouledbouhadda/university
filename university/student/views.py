@@ -21,7 +21,9 @@ def student_home(request):
      return render(request,'student_homepage.html',{'subs' : query_set2})
 
 
+
 @login_required
 @user_passes_test(lambda u: u.is_teacher )
 def teacher_home(request):
     return render(request,'teacher_homepage.html')
+
