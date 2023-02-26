@@ -16,3 +16,6 @@ class Etudiant (models.Model):
     prenom= models.CharField(max_length=20)
     age = models.IntegerField()
     classes=models.ForeignKey(Classes,on_delete=models.CASCADE)
+
+
+
