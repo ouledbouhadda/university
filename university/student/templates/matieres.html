@@ -5,7 +5,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     {% load django_bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
-    <title>Teacher</title>
+    <title>Matiére</title>
   </head>
   <body>
     {% include 'teacher_navbar.html' %} {% bootstrap_messages %} {% block content %}
@@ -28,7 +28,6 @@
       body {
         font: 400 1.4rem "Lato", Verdana, Helvetica, sans-serif;
         text-align: center;
-        background-image: url(tt.jpg);
       }
       .btn-change.disabled,
       .btn-change[disabled] {
@@ -53,15 +52,15 @@
     </style>
     <div class="container">
       <div class="row">
-        <h2><u>TEK-UP CLASSES</u></h2>
-        {% for class in classes %}
+        <h2><u>{{classe}} SUBJECTS</u></h2>
+        {% for subject in all %}
         <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 btn-container">
-          {% if class in cla %}
-          <a href="{% url 'teacher_matiere'%}?classe={{class}}">
-            <button class="btn-change btn-lg">{{ class }}</button>
+          {% if subject in subs %}
+          <a href="{% url 'teacher_note' classe=classe subject=subject %}">
+            <button class="btn-change btn-lg">{{ subject }}</button>
           </a>
           {% else %}
-          <button class="btn-change btn-lg disabled" disabled>{{ class }}</button>
+          <button class="btn-change btn-lg disabled" disabled>{{ subject }}</button>
           {% endif %}
         </div>
         {% endfor %}

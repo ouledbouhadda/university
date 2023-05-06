@@ -21,46 +21,51 @@
     <script defer scr="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
     <script defer src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
     <script defer src="script.js"></script>
-<form action="{% url 'logout' %}" method="post" style="float: right;">
-       {% csrf_token %}
-       <input type="hidden" name="next" value="{% url 'home' %}">
-       <button type="submit">Logout</button>
-     </form>
 
 
-<title>Document</title>
+<title>Student</title>
 </head>
-<center>
-       <h1>Bienvenue {{user}} </h1>
-</center>
+<style>
+    h3{
+        color: black;
+        text-align: center;
+    }
+    th{
+        color: blue;
+        text-align: center;
+    }
+</style>
+
 
 <body> 
-       <h3> voici vos resultat pour votre année {{user.student_classes}} :</h3> 
+    {% include 'navbar.html' %}
+       <h3> Voici vos resultats pour votre année {{user.student_classes}} : </h3> 
     <div class="container w-50 pt-5">
         <table id="example" class="table table-striped table-bordered" style="width:100%">
-        <thead>
-            <tr>
-                <th>matiere</th>
-                <th>note_ds</th>
-                <th>note_examen</th>
-                <th>moyenne</th>
-            </tr>
-        </thead>
-        <tbody>
-            
-              {%  for i in subs %}
-              <tr>
-                     <td>{{i.subject}}</td>
-                     <td>{{i.note_ds}}</td>
-                     <td> {{i.note_ex}}</td>
-                     <td>19</td>
-              </tr>
-             {% endfor %}
-          
-        </tbody>
-       
-        </tfoot>
-        </table>  
+            <thead>
+                <tr>
+                    <th>Matiere</th>
+                    <th>Note_devoir_surveillé</th>
+                    <th>Note_examen</th>
+                    <th>Moyenne</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for subject, grades in subject_grades.items %}
+                <tr>
+                  <td>{{ subject }}</td>
+                  <td>{{ grades.note_ds|default:"-" }}</td>
+                  <td>{{ grades.note_ex|default:"-" }}</td>
+                  <td>{{ grades.moyenne|floatformat:2|default:"-" }}</td>
+                </tr>
+                {% endfor %}
+                
+              
+            </tbody>
+            </tfoot>
+        </table>
+        
+        
     </div>
   
 

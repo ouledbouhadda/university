@@ -8,3 +8,4 @@ admin.site.register(Student)
 admin.site.register(Student_Subject)
 admin.site.register(User)
 
+
